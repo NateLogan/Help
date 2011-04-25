@@ -36,11 +36,6 @@ public class Help extends JavaPlugin {
         name = this.getDescription().getName();
         version = this.getDescription().getVersion();
 
-<<<<<<< HEAD
-=======
-        HelpLoader.load(this.getDataFolder(), helpList);
-
->>>>>>> 553b42d681b8ab56c5ae87b81b891d9d7fb68c70
         HelpPermissions.initialize(getServer());
         HelpSettings.initialize(getDataFolder());
 

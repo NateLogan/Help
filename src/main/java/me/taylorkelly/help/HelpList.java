@@ -81,63 +81,32 @@ public class HelpList {
             return ret;
         }
 
-<<<<<<< HEAD
         List<String> names = new ArrayList<String>(pluginHelpList.get(plugin).keySet());
         Collator collator = Collator.getInstance();
         collator.setStrength(Collator.SECONDARY);
         Collections.sort(names, collator);
 
         if (player instanceof Player) {
-            int index = 0;
-            int currentCount = 0;
-            int lineLength = 0;
-            while (index < names.size() && ret.size() < size){// && lineLength < size) {
-                String currName = names.get(index);
-                HelpEntry entry = pluginHelpList.get(plugin).get(currName);
+            for (int index = 0, currentCount = 0; index < names.size() && ret.size() < size; ++index) {// && lineLength < size) {
+                HelpEntry entry = pluginHelpList.get(plugin).get(names.get(index));
                 if (entry != null && entry.playerCanUse((Player) player) && entry.visible) {
                     if (currentCount >= start) {
                         ret.add(entry);
-                        lineLength += entry.lineLength;
                     } else {
                         currentCount++;
                     }
                 }
-                index++;
             }
         } else {
-            int index = 0;
-            while (index < names.size() && ret.size() < size){
-                String currName = names.get(index);
-                HelpEntry entry = pluginHelpList.get(plugin).get(currName);
+            for (int index = 0, currentCount = 0; index < names.size() && ret.size() < size; ++index) {
+                HelpEntry entry = pluginHelpList.get(plugin).get(names.get(index));
                 if (entry != null && entry.visible) {
-                   ret.add(entry);
-=======
-            if (player instanceof Player) {
-                //int lineLength = 0;
-                for (int index = 0, currentCount = 0; index < names.size() && ret.size() < size; ++index) {// && lineLength < size) {
-                    HelpEntry entry = pluginHelpList.get(plugin).get(names.get(index));
-                    if (entry != null && entry.playerCanUse((Player) player) && entry.visible) {
-                        if (currentCount >= start) {
-                            ret.add(entry);
-                            //lineLength += entry.lineLength;
-                        } else {
-                            currentCount++;
-                        }
+                    if (currentCount >= start) {
+                        ret.add(entry);
+                    } else {
+                        currentCount++;
                     }
                 }
-            } else {
-                for (int index = 0, currentCount = 0; index < names.size() && ret.size() < size; ++index) {
-                    HelpEntry entry = pluginHelpList.get(plugin).get(names.get(index));
-                    if (entry != null && entry.visible) {
-                        if (currentCount >= start) {
-                            ret.add(entry);
-                        } else {
-                            currentCount++;
-                        }
-                    }
->>>>>>> 553b42d681b8ab56c5ae87b81b891d9d7fb68c70
-                }
-                index++;
             }
         }
         return ret;
@@ -229,7 +198,7 @@ public class HelpList {
 
     public boolean customRegisterCommand(String command, String description, String plugin, boolean main, String[] permissions, boolean visible) {
         HelpEntry entry = new HelpEntry(command, description, plugin, main, permissions, visible);
-       if (main) {
+        if (main) {
             mainHelpList.put(command, entry);
         }
         customSaveEntry(plugin, entry, true);
@@ -290,9 +259,11 @@ public class HelpList {
         savedList.add(entry);
     }
 
-    private boolean isRegistered(String command){
-        for(HashMap map : pluginHelpList.values()){
-            if(map.containsKey(command)) return true;
+    private boolean isRegistered(String command) {
+        for (HashMap map : pluginHelpList.values()) {
+            if (map.containsKey(command)) {
+                return true;
+            }
         }
         return false;
     }
