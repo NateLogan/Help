@@ -82,8 +82,15 @@ public class Lister {
 
             }
         } else {
+<<<<<<< HEAD
             if (plugin == null) {   //display the default page?
                 player.sendMessage(introTextColor.toString() + "HELP (" + page + "/" + maxPages + ")");
+=======
+            int width = System.getProperty("os.name").startsWith("Windows") ? 80 - 17 : 90;
+            if (plugin == null) {
+                player.sendMessage(introDashColor.toString() + JMinecraftFontWidthCalculator.unformattedPadCenter(
+                        introTextColor.toString() + " HELP (" + page + "/" + maxPages + ") " + introDashColor.toString(), width, '-'));
+>>>>>>> 553b42d681b8ab56c5ae87b81b891d9d7fb68c70
             } else {
                 if (sortedEntries.isEmpty()) {
                     player.sendMessage(ChatColor.RED.toString() + "Plugin " + plugin + " has no Help entries");
@@ -97,9 +104,27 @@ public class Lister {
                         entry.command, ChatColor.WHITE.toString(), descriptionColor.toString()).
                         replace("[", ChatColor.GRAY.toString() + "[").replace("]", "]" + commandColor.toString());
 
+<<<<<<< HEAD
                     player.sendMessage("   " + line +
                             entry.description.replace("[", ChatColor.GRAY.toString() + "[").replace("]", "]"
                             + descriptionColor.toString()));
+=======
+                //Find remaining length left
+                int descriptionSize = entry.description.length();
+                int sizeRemaining = width - JMinecraftFontWidthCalculator.strLen(line);
+
+                if (sizeRemaining > descriptionSize) {
+                    player.sendMessage(line + JMinecraftFontWidthCalculator.unformattedPadLeft(
+                            entry.description.replace("[", ChatColor.GRAY.toString() + "[").
+                            replace("]", "]" + descriptionColor.toString()), sizeRemaining, ' '));
+                } else {
+                    player.sendMessage(line);
+                    player.sendMessage(JMinecraftFontWidthCalculator.unformattedPadLeft(
+                            entry.description.replace("[", ChatColor.GRAY.toString() + "[").
+                            replace("]", "]" + descriptionColor.toString()), width, ' '));
+                }
+
+>>>>>>> 553b42d681b8ab56c5ae87b81b891d9d7fb68c70
             }
         }
     }

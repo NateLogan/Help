@@ -44,16 +44,16 @@ public class HelpList {
                 index++;
             }
         } else {
-                for (int index = 0, currentCount = 0; index < names.size() && ret.size() < size; ++index) {
-                    HelpEntry entry = mainHelpList.get(names.get(index));
-                    if (entry.visible) {
-                        if (currentCount >= start) {
-                            ret.add(entry);
-                        }else {
-                            currentCount++;
-                        }
+            for (int index = 0, currentCount = 0; index < names.size() && ret.size() < size; ++index) {
+                HelpEntry entry = mainHelpList.get(names.get(index));
+                if (entry.visible) {
+                    if (currentCount >= start) {
+                        ret.add(entry);
+                    } else {
+                        currentCount++;
                     }
                 }
+            }
         }
         return ret;
     }
@@ -81,6 +81,7 @@ public class HelpList {
             return ret;
         }
 
+<<<<<<< HEAD
         List<String> names = new ArrayList<String>(pluginHelpList.get(plugin).keySet());
         Collator collator = Collator.getInstance();
         collator.setStrength(Collator.SECONDARY);
@@ -110,6 +111,31 @@ public class HelpList {
                 HelpEntry entry = pluginHelpList.get(plugin).get(currName);
                 if (entry != null && entry.visible) {
                    ret.add(entry);
+=======
+            if (player instanceof Player) {
+                //int lineLength = 0;
+                for (int index = 0, currentCount = 0; index < names.size() && ret.size() < size; ++index) {// && lineLength < size) {
+                    HelpEntry entry = pluginHelpList.get(plugin).get(names.get(index));
+                    if (entry != null && entry.playerCanUse((Player) player) && entry.visible) {
+                        if (currentCount >= start) {
+                            ret.add(entry);
+                            //lineLength += entry.lineLength;
+                        } else {
+                            currentCount++;
+                        }
+                    }
+                }
+            } else {
+                for (int index = 0, currentCount = 0; index < names.size() && ret.size() < size; ++index) {
+                    HelpEntry entry = pluginHelpList.get(plugin).get(names.get(index));
+                    if (entry != null && entry.visible) {
+                        if (currentCount >= start) {
+                            ret.add(entry);
+                        } else {
+                            currentCount++;
+                        }
+                    }
+>>>>>>> 553b42d681b8ab56c5ae87b81b891d9d7fb68c70
                 }
                 index++;
             }
