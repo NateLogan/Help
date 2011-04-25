@@ -14,7 +14,7 @@ public class HelpLoader {
 
     public static void load(File dataFolder, HelpList list) {
         File helpFolder = new File(dataFolder, "ExtraHelp");
-        if (helpFolder.exists()) {
+        if (!helpFolder.exists()) {
             helpFolder.mkdirs();
         }
         int count = 0;
